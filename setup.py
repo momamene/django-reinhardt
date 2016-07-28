@@ -22,7 +22,7 @@ setup(
     version='0.1.0',
     use_scm_version=True,
     setup_requires=['setuptools_scm', 'pytest-runner'],
-    description="Manage object permissions by implementing methods in Django Model",
+    description="Manage object permissions by defining methods in Django Model",
     long_description=readme + '\n\n' + history,
     author="Hyuntak Joo",
     author_email='momamene@gmail.com',
@@ -33,16 +33,11 @@ setup(
     ],
     package_dir={'reinhardt':
                  'reinhardt'},
-    entry_points={
-        'console_scripts': [
-            'reinhardt=reinhardt.cli:main'
-        ]
-    },
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
-    keywords='reinhardt',
+    keywords = 'django object logical permission auth authentication reinhardt',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
