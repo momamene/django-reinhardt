@@ -10,5 +10,8 @@ class Inquiry(models.Model):
     text = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
 
-    def can_add_inquiry(self, user):
+    def can_change_inquiry(self, user):
         return self.writer == user
+
+    def can_view_inquiry(self, user):
+        return self.writer == user or user.is_staff

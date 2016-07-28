@@ -14,6 +14,9 @@ class PermissionBackendTestCase(TestCase):
         self.user2 = get_user_model().objects.create(
             username='maiyan'
         )
+        self.user3 = get_user_model().objects.create(
+            username='ikuta'
+        )
         self.inquiry = Inquiry.objects.create(
             writer=self.user1,
             text='How can I delete my account?'
@@ -21,8 +24,14 @@ class PermissionBackendTestCase(TestCase):
 
     def test_has_perm(self):
         self.assertTrue(
-            self.user1.has_perm('tests.add_inquiry', obj=self.inquiry)
+            self.user1.has_perm('tests.change_inquiry', obj=self.inquiry)
         )
         self.assertFalse(
-            self.user2.has_perm('tests.add_inquiry', obj=self.inquiry)
+            self.user2.has_perm('tests.view_inquiry', obj=self.inquiry)
+        )
+        self.assertFalse(
+            self.user3.has_perm('tests.change_inquiry', obj=self.inquiry)
+        )
+        self.assertFalse(
+            self.user3.has_perm('tests.view_inquiry', obj=self.inquiry)
         )
