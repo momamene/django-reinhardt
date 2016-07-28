@@ -20,8 +20,7 @@ test_requirements = [
 setup(
     name='django-reinhardt',
     version='0.1.0',
-    use_scm_version=True,
-    setup_requires=['setuptools_scm', 'pytest-runner'],
+    setup_requires=['pytest-runner'],
     description="Manage object permissions by defining methods in Django Model",
     long_description=readme + '\n\n' + history,
     author="Hyuntak Joo",
