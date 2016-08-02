@@ -35,3 +35,6 @@ class PermissionBackendTestCase(TestCase):
         self.assertFalse(
             self.user3.has_perm('tests.view_inquiry', obj=self.inquiry)
         )
+        self.assertFalse(
+            self.user1.has_perm('tests.reply_inquiry', obj=self.inquiry)
+        )

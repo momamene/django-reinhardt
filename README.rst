@@ -22,7 +22,7 @@ There are many object permission backends like `django-guardian <https://github.
 
 But some time, it is needed to define permissions as not just object-user relationship.
 
-`django-reinhardt <https://github.com/momamene/django-reinhardt>`_ make you handle object permissions by defining methods in your django model 
+`django-reinhardt <https://github.com/momamene/django-reinhardt>`_ make you handle object permissions by defining methods in your django model
 
 * Free software: MIT license
 * Documentation: https://django-reinhardt.readthedocs.io.
@@ -44,7 +44,7 @@ Add extra authorization backends in your settings.py::
         'django.contrib.auth.backends.ModelBackend', # default
         'reinhardt.backends.PermissionBackend',
     )
-    
+
 It's done. you don't need to add any app or migrate anything.
 
 Assume that ``Inquiry`` model needs to have two permission: ``change_inqury``, ``view_inquiry``  ::
@@ -55,13 +55,15 @@ Assume that ``Inquiry`` model needs to have two permission: ``change_inqury``, `
         text = models.TextField()
         pub_date = models.DateTimeField(auto_now_add=True)
 
-        def can_change_inquiry(self, user):
-            return self.writer == user
-
-        def can_view_inquiry(self, user):
+        @object_permission(codename='change_inquiry')
+        def is_changeable_by(self, user):
             return self.writer == user or user.is_staff
 
-Then you can just define ``can_change_inquiry`` and ``can_view_inquiry`` ( ``can_`` is prefix to distinguish permission-related method from others ), which have user instance parameter.
+        @object_permission(codename='view_inquiry')
+        def is_viewable_by(self, user):
+            return self.writer == user
+
+Then you can just define methods having ``user`` parameter, decorated by ``object_permission``.
 
 Now the following codes will work as expected: ::
 
