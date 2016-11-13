@@ -9,4 +9,4 @@ cryptography==1.4
 PyYAML==3.11
 pytest==2.9.2
 pytest-django==2.9.1
-django-environ==0.4.0
+django-environ==0.4.1
